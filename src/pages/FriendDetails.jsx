@@ -44,32 +44,45 @@ export default function FriendDetails() {
     const updated = [newEntry, ...existing];
 
     localStorage.setItem("timeline", JSON.stringify(updated));
-    toast.success(`${type} added!`);
+
+    // ✅ UPDATED TOAST MESSAGE
+    toast.success(`${type} with ${friend.name}`, {
+      duration: 2000,
+    });
   };
 
   if (!friend) {
-    return <div className="text-center py-10">Loading...</div>;
+    return (
+      <div className="text-center py-20 text-gray-500">
+        Loading...
+      </div>
+    );
   }
 
   return (
-    <div className="bg-gray-100 min-h-screen pt-24 pb-10 px-4">
+    <div className="bg-gray-100 min-h-screen pt-20 sm:pt-24 pb-10 px-3 sm:px-6">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
 
         {/* LEFT SIDE */}
         <div className="space-y-4">
 
-          {/* PROFILE */}
-          <div className="bg-white rounded-xl border p-6 text-center shadow-sm">
+          {/* PROFILE CARD */}
+          <div className="bg-white rounded-xl border p-5 sm:p-6 text-center shadow-sm">
             <img
               src={friend.picture}
-              className="w-20 h-20 rounded-full mx-auto mb-3"
+              alt={friend.name}
+              className="w-16 h-16 sm:w-20 sm:h-20 rounded-full mx-auto mb-3"
             />
 
-            <h2 className="font-semibold text-gray-800 text-lg">
+            <h2 className="font-semibold text-gray-800 text-base sm:text-lg">
               {friend.name}
             </h2>
 
-            <span className={`text-xs px-3 py-1 rounded-full mt-2 inline-block ${getStatusStyle(friend.status)}`}>
+            <span
+              className={`text-xs px-3 py-1 rounded-full mt-2 inline-block ${getStatusStyle(
+                friend.status
+              )}`}
+            >
               {friend.status}
             </span>
 
@@ -84,27 +97,27 @@ export default function FriendDetails() {
               ))}
             </div>
 
-            <p className="text-xs text-gray-500 mt-4 italic">
+            <p className="text-xs text-gray-500 mt-4 italic px-2">
               "{friend.bio}"
             </p>
 
-            <p className="text-xs text-gray-400 mt-1">
+            <p className="text-xs text-gray-400 mt-1 break-all">
               Preferred: {friend.email}
             </p>
           </div>
 
-          {/* BUTTONS */}
+          {/* ACTION BUTTONS */}
           <div className="space-y-3">
 
-            <button className="w-full flex items-center justify-center gap-3 bg-white border rounded-xl py-4 hover:bg-gray-50">
+            <button className="w-full flex items-center justify-center gap-3 bg-white border rounded-xl py-3 sm:py-4 text-sm sm:text-base hover:bg-gray-50 transition">
               <FaBell /> Snooze 2 Weeks
             </button>
 
-            <button className="w-full flex items-center justify-center gap-3 bg-white border rounded-xl py-4 hover:bg-gray-50">
+            <button className="w-full flex items-center justify-center gap-3 bg-white border rounded-xl py-3 sm:py-4 text-sm sm:text-base hover:bg-gray-50 transition">
               <FaArchive /> Archive
             </button>
 
-            <button className="w-full flex items-center justify-center gap-3 bg-white border rounded-xl py-4 text-red-500 hover:bg-red-50">
+            <button className="w-full flex items-center justify-center gap-3 bg-white border rounded-xl py-3 sm:py-4 text-sm sm:text-base text-red-500 hover:bg-red-50 transition">
               <FaTrash /> Delete
             </button>
 
@@ -114,11 +127,11 @@ export default function FriendDetails() {
         {/* RIGHT SIDE */}
         <div className="md:col-span-2 space-y-6">
 
-          {/* 🔥 TOP STATS (IMPORTANT FIX) */}
+          {/* TOP STATS */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
 
-            <div className="bg-white p-5 rounded-xl border text-center shadow-sm">
-              <h2 className="text-2xl font-bold text-[#1f4d3a]">
+            <div className="bg-white p-4 sm:p-5 rounded-xl border text-center shadow-sm">
+              <h2 className="text-xl sm:text-2xl font-bold text-[#1f4d3a]">
                 {friend.days_since_contact}
               </h2>
               <p className="text-xs text-gray-500 mt-1">
@@ -126,8 +139,8 @@ export default function FriendDetails() {
               </p>
             </div>
 
-            <div className="bg-white p-5 rounded-xl border text-center shadow-sm">
-              <h2 className="text-2xl font-bold text-[#1f4d3a]">
+            <div className="bg-white p-4 sm:p-5 rounded-xl border text-center shadow-sm">
+              <h2 className="text-xl sm:text-2xl font-bold text-[#1f4d3a]">
                 {friend.goal}
               </h2>
               <p className="text-xs text-gray-500 mt-1">
@@ -135,8 +148,8 @@ export default function FriendDetails() {
               </p>
             </div>
 
-            <div className="bg-white p-5 rounded-xl border text-center shadow-sm">
-              <h2 className="text-xl font-bold text-[#1f4d3a]">
+            <div className="bg-white p-4 sm:p-5 rounded-xl border text-center shadow-sm">
+              <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-[#1f4d3a]">
                 {friend.next_due_date}
               </h2>
               <p className="text-xs text-gray-400 mt-1">
@@ -146,10 +159,10 @@ export default function FriendDetails() {
 
           </div>
 
-          {/* 🔥 RELATIONSHIP GOAL */}
-          <div className="bg-white rounded-xl border p-6 shadow-sm">
+          {/* RELATIONSHIP GOAL */}
+          <div className="bg-white rounded-xl border p-5 sm:p-6 shadow-sm">
             <div className="flex justify-between items-center mb-3">
-              <h3 className="font-semibold text-gray-800">
+              <h3 className="font-semibold text-gray-800 text-sm sm:text-base">
                 Relationship Goal
               </h3>
 
@@ -164,35 +177,35 @@ export default function FriendDetails() {
           </div>
 
           {/* QUICK CHECK-IN */}
-          <div className="bg-white rounded-xl border p-6 shadow-sm">
-            <h3 className="mb-4 font-semibold text-gray-800">
+          <div className="bg-white rounded-xl border p-5 sm:p-6 shadow-sm">
+            <h3 className="mb-4 font-semibold text-gray-800 text-sm sm:text-base">
               Quick Check-In
             </h3>
 
-            <div className="grid grid-cols-3 gap-4 text-center">
+            <div className="grid grid-cols-3 gap-3 sm:gap-4 text-center">
 
               <div
                 onClick={() => addToTimeline("Call")}
-                className="bg-gray-100 p-5 rounded-lg hover:bg-gray-200 cursor-pointer"
+                className="bg-gray-100 p-4 sm:p-5 rounded-lg hover:bg-gray-200 cursor-pointer transition"
               >
-                <FaPhoneAlt className="mx-auto mb-2 text-gray-500" />
-                Call
+                <FaPhoneAlt className="mx-auto mb-2 text-gray-500 text-lg sm:text-xl" />
+                <p className="text-xs sm:text-sm text-gray-700">Call</p>
               </div>
 
               <div
                 onClick={() => addToTimeline("Text")}
-                className="bg-gray-100 p-5 rounded-lg hover:bg-gray-200 cursor-pointer"
+                className="bg-gray-100 p-4 sm:p-5 rounded-lg hover:bg-gray-200 cursor-pointer transition"
               >
-                <FaCommentDots className="mx-auto mb-2 text-gray-500" />
-                Text
+                <FaCommentDots className="mx-auto mb-2 text-gray-500 text-lg sm:text-xl" />
+                <p className="text-xs sm:text-sm text-gray-700">Text</p>
               </div>
 
               <div
                 onClick={() => addToTimeline("Video")}
-                className="bg-gray-100 p-5 rounded-lg hover:bg-gray-200 cursor-pointer"
+                className="bg-gray-100 p-4 sm:p-5 rounded-lg hover:bg-gray-200 cursor-pointer transition"
               >
-                <FaVideo className="mx-auto mb-2 text-gray-500" />
-                Video
+                <FaVideo className="mx-auto mb-2 text-gray-500 text-lg sm:text-xl" />
+                <p className="text-xs sm:text-sm text-gray-700">Video</p>
               </div>
 
             </div>
