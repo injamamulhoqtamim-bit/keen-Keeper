@@ -1,5 +1,5 @@
 {
-  "name": "kin-keeper",
+  "name": "keen-keeper",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -12,16 +12,18 @@
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-hot-toast": "^2.6.0",
     "react-icons": "^5.6.0",
+    "react-is": "^19.2.5",
     "react-router-dom": "^7.14.1",
-    "react-hot-toast": "^2.6.0"
+    "recharts": "^3.8.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.5.0",
     "eslint": "^9.39.4",
-    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.6",
     "globals": "^17.4.0",
     "postcss": "^8.5.9",

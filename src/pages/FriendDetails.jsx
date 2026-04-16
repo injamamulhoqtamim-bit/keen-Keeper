@@ -69,7 +69,7 @@ if (!friend) {
   return (
     <div className="bg-white-100 min-h-screen pt-20 sm:pt-24 pb-10">
 
-      {/*  CENTERED CONTAINER (FIGMA STYLE) */}
+      {/*  CENTERED CONTAINER  */}
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -101,7 +101,7 @@ if (!friend) {
                 {friend.tags.map((tag, i) => (
                   <span
                     key={i}
-                    className="text-[10px] bg-green-100 text-green-700 px-2 py-1 rounded-full"
+                    className="text-[10px] bg-green-200 text-gray-700 px-2 py-1 rounded-full"
                   >
                     {tag}
                   </span>
