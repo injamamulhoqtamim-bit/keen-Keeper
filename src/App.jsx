@@ -8,7 +8,7 @@ export default function App() {
     <>
       <Navbar />
 
-      {/*  ADD THIS */}
+      {/* ADD THIS */}
       <Toaster position="top-center" reverseOrder={false} />
 
       <Outlet />
