@@ -33,7 +33,7 @@ export default function Timeline() {
       : timeline.filter((item) => item.type === filter);
 
   return (
-    <div className="min-h-screen pt-20 sm:pt-24 px-3 sm:px-6 bg-gray-100">
+    <div className="min-h-screen pt-20 sm:pt-24 px-3 sm:px-6 bg-white-100">
       <div className="max-w-4xl mx-auto">
 
         {/* TITLE */}
