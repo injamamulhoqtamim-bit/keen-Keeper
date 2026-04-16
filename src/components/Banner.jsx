@@ -2,7 +2,7 @@ import { FaUserPlus } from "react-icons/fa";
 
 export default function Banner() {
   return (
-    <div className="bg-gray-100 pt-24 sm:pt-28 pb-12 sm:pb-16 text-center px-4">
+    <div className="bg-white-100 pt-24 sm:pt-28 pb-12 sm:pb-16 text-center px-4">
 
       {/* Title */}
       <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-3 sm:mb-4 leading-tight">
@@ -16,7 +16,10 @@ export default function Banner() {
 
       {/* Button */}
       <button className="inline-flex items-center gap-2 bg-[#1f4d3a] hover:bg-[#17382c] text-white px-4 sm:px-5 py-2 rounded-md text-xs sm:text-sm transition">
-        <FaUserPlus className="text-xs sm:text-sm" />
+
+        {/* "+" Icon */}
+        <span className="text-base sm:text-lg font-bold leading-none">+</span>
+
         Add a Friend
       </button>
 
