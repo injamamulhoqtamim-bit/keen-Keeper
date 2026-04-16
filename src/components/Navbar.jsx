@@ -7,12 +7,12 @@ export default function Navbar() {
 
   return (
     <nav className="w-full bg-[#f3f4f6] border-b border-gray-200 fixed top-0 left-0 z-50">
-      <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-3">
+      <div className="max-w-7xl mx-auto flex justify-between items-center px-4 sm:px-6 py-3">
 
-        {/* Logo */}
-        <h1 className="text-lg font-semibold">
-          <span className="font-bold text-gray-800">Keen</span>
-          <span className="text-green-900 ml-1">Keeper</span>
+        {/* 🔥 LOGO FIXED */}
+        <h1 className="text-xl sm:text-2xl font-bold tracking-tight">
+          <span className="text-gray-800">Keen</span>
+          <span className="text-[#1f4d3a]">Keeper</span>
         </h1>
 
         {/* Desktop Menu */}
@@ -22,7 +22,7 @@ export default function Navbar() {
             className={({ isActive }) =>
               isActive
                 ? "flex items-center gap-2 bg-[#1f4d3a] text-white px-4 py-2 rounded-md text-sm"
-                : "flex items-center gap-2 text-gray-600 text-sm"
+                : "flex items-center gap-2 text-gray-600 text-sm hover:text-black"
             }
           >
             <FaHome /> Home
@@ -33,7 +33,7 @@ export default function Navbar() {
             className={({ isActive }) =>
               isActive
                 ? "flex items-center gap-2 bg-[#1f4d3a] text-white px-4 py-2 rounded-md text-sm"
-                : "flex items-center gap-2 text-gray-600 text-sm"
+                : "flex items-center gap-2 text-gray-600 text-sm hover:text-black"
             }
           >
             <FaClock /> Timeline
@@ -44,7 +44,7 @@ export default function Navbar() {
             className={({ isActive }) =>
               isActive
                 ? "flex items-center gap-2 bg-[#1f4d3a] text-white px-4 py-2 rounded-md text-sm"
-                : "flex items-center gap-2 text-gray-600 text-sm"
+                : "flex items-center gap-2 text-gray-600 text-sm hover:text-black"
             }
           >
             <FaChartLine /> Stats
@@ -61,12 +61,12 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="md:hidden flex flex-col gap-3 px-6 pb-4">
+        <div className="md:hidden flex flex-col gap-3 px-4 sm:px-6 pb-4 bg-[#f3f4f6]">
 
           <NavLink
             to="/"
             onClick={() => setMenuOpen(false)}
-            className="flex items-center gap-2 text-gray-700"
+            className="flex items-center gap-2 text-gray-700 text-sm"
           >
             <FaHome /> Home
           </NavLink>
@@ -74,7 +74,7 @@ export default function Navbar() {
           <NavLink
             to="/timeline"
             onClick={() => setMenuOpen(false)}
-            className="flex items-center gap-2 text-gray-700"
+            className="flex items-center gap-2 text-gray-700 text-sm"
           >
             <FaClock /> Timeline
           </NavLink>
@@ -82,7 +82,7 @@ export default function Navbar() {
           <NavLink
             to="/stats"
             onClick={() => setMenuOpen(false)}
-            className="flex items-center gap-2 text-gray-700"
+            className="flex items-center gap-2 text-gray-700 text-sm"
           >
             <FaChartLine /> Stats
           </NavLink>
