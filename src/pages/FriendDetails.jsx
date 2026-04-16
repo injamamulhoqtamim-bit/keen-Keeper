@@ -50,24 +50,26 @@ export default function FriendDetails() {
     });
   };
 
-  // ✅ LOADING UI
-  if (!friend) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-10 h-10 border-4 border-gray-300 border-t-[#1f4d3a] rounded-full animate-spin"></div>
-          <p className="text-gray-500 text-sm sm:text-base">
-            Loading friend details...
-          </p>
-        </div>
+  //  LOADING UI 
+if (!friend) {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+
+      <div className="flex items-center justify-center">
+
+        {/* Spinner */}
+        <div className="w-8 h-8 sm:w-10 sm:h-10 border-4 border-gray-300 border-t-[#1f4d3a] rounded-full animate-spin"></div>
+
       </div>
-    );
-  }
+
+    </div>
+  );
+}
 
   return (
     <div className="bg-white-100 min-h-screen pt-20 sm:pt-24 pb-10">
 
-      {/* 🔥 CENTERED CONTAINER (FIGMA STYLE) */}
+      {/*  CENTERED CONTAINER (FIGMA STYLE) */}
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
