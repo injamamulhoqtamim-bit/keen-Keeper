@@ -52,15 +52,27 @@ export default function FriendDetails() {
   };
 
   if (!friend) {
-    return (
-      <div className="text-center py-20 text-gray-500">
-        Loading...
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      
+      <div className="flex flex-col items-center gap-4">
+        
+        {/* Spinner */}
+        <div className="w-10 h-10 border-4 border-gray-300 border-t-[#1f4d3a] rounded-full animate-spin"></div>
+
+        {/* Text */}
+        <p className="text-gray-500 text-sm sm:text-base">
+          Loading friend details...
+        </p>
+
       </div>
-    );
-  }
+
+    </div>
+  );
+}
 
   return (
-    <div className="bg-gray-100 min-h-screen pt-20 sm:pt-24 pb-10 px-3 sm:px-6">
+    <div className="bg-white-100 min-h-screen pt-20 sm:pt-24 pb-10 px-3 sm:px-6">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
 
         {/* LEFT SIDE */}
