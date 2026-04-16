@@ -2,7 +2,7 @@ import { FaUserPlus } from "react-icons/fa";
 
 export default function Banner() {
   return (
-    <div className="bg-gray-100 pt-24 sm:pt-28 pb-12 sm:pb-16">
+    <div className="bg-white-100 pt-24 sm:pt-28 pb-12 sm:pb-16">
 
       {/* 🔥 Container (controls side spacing like 245px) */}
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 text-center">
