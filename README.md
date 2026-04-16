@@ -1,16 +1,63 @@
-# React + Vite
+# KeenKeeper
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Overview
 
-Currently, two official plugins are available:
+KeenKeeper is a simple and intuitive friendship management app that helps you keep track of meaningful relationships. It allows you to monitor interactions, set goals, and ensure you stay connected with the people who matter most.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+##  Technologies Used
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* React.js
+* React Router
+* Tailwind CSS
+* Recharts
+* React Icons
+* React Hot Toast
+* LocalStorage (for data persistence)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+##  Key Features
+
+*  **Friendship Analytics**
+  Visualize your interactions (Call, Text, Video) using a dynamic pie chart.
+
+*  **Friend Management System**
+  View detailed friend profiles, track contact frequency, and manage relationship goals.
+
+*  **Timeline Tracking**
+  Log interactions (call, text, video) and maintain a history of your communication.
+
+---
+
+##  UI Highlights
+
+* Fully responsive design
+* Clean and minimal interface 
+* Smooth user experience with toast notifications 
+
+---
+
+##  Setup Instructions
+
+```bash
+git clone https://github.com/your-username/keen-keeper.git
+cd keen-keeper
+npm install
+npm run dev
+```
+
+---
+
+##  Future Improvements
+
+* Add authentication system 
+* Cloud database integration 
+* Reminder notifications
+
+---
+
+## Author
+
+Developed by Hoq20
