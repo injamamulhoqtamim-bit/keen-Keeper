@@ -32,7 +32,7 @@ export default function Stats() {
   const COLORS = ["#7c3aed", "#1f4d3a", "#34a853"];
 
   return (
-    <div className="bg-gray-100 min-h-screen pt-24 pb-10">
+    <div className="bg-white min-h-screen pt-24 pb-10">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
 
         {/* Title */}
