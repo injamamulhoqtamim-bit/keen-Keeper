@@ -4,11 +4,9 @@ import {
   FaBell,
   FaArchive,
   FaTrash,
-  FaPhoneAlt,
-  FaCommentDots,
-  FaVideo,
 } from "react-icons/fa";
 import toast from "react-hot-toast";
+import NotFound from "./NotFound";
 
 const getStatusStyle = (status) => {
   if (status === "overdue") return "bg-red-100 text-red-600";
@@ -18,7 +16,9 @@ const getStatusStyle = (status) => {
 
 export default function FriendDetails() {
   const { id } = useParams();
+
   const [friend, setFriend] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch("/friends.json")
@@ -26,13 +26,29 @@ export default function FriendDetails() {
       .then((data) => {
         const found = data.find((f) => f.id === Number(id));
         setFriend(found);
+        setLoading(false);
       })
-      .catch(() => toast.error("Failed to load data"));
+      .catch(() => {
+        toast.error("Failed to load data");
+        setLoading(false);
+      });
   }, [id]);
 
-  const addToTimeline = (type) => {
-    if (!friend) return;
+  // ✅ LOADING
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <div className="w-8 h-8 sm:w-10 sm:h-10 border-4 border-gray-300 border-t-[#1f4d3a] rounded-full animate-spin"></div>
+      </div>
+    );
+  }
 
+  // ❌ NOT FOUND
+  if (!friend) {
+    return <NotFound />;
+  }
+
+  const addToTimeline = (type) => {
     const newEntry = {
       id: Date.now(),
       type,
@@ -41,59 +57,32 @@ export default function FriendDetails() {
     };
 
     const existing = JSON.parse(localStorage.getItem("timeline")) || [];
-    const updated = [newEntry, ...existing];
+    localStorage.setItem("timeline", JSON.stringify([newEntry, ...existing]));
 
-    localStorage.setItem("timeline", JSON.stringify(updated));
-
-    toast.success(`${type} with ${friend.name}`, {
-      duration: 2000,
-    });
+    toast.success(`${type} with ${friend.name}`);
   };
 
-  //  LOADING UI 
-if (!friend) {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-
-      <div className="flex items-center justify-center">
-
-        {/* Spinner */}
-        <div className="w-8 h-8 sm:w-10 sm:h-10 border-4 border-gray-300 border-t-[#1f4d3a] rounded-full animate-spin"></div>
-
-      </div>
-
-    </div>
-  );
-}
-
-  return (
-    <div className="bg-white-100 min-h-screen pt-20 sm:pt-24 pb-10">
-
-      {/*  CENTERED CONTAINER  */}
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
+    <div className="bg-gray-100 min-h-screen pt-20 sm:pt-24 pb-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-          {/* LEFT SIDE */}
+          {/* LEFT */}
           <div className="space-y-4">
 
-            {/* PROFILE CARD */}
-            <div className="bg-white rounded-xl border p-5 sm:p-6 text-center shadow-sm">
+            <div className="bg-white rounded-xl border p-5 text-center shadow-sm">
               <img
                 src={friend.picture}
                 alt={friend.name}
-                className="w-16 h-16 sm:w-20 sm:h-20 rounded-full mx-auto mb-3"
+                className="w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto mb-3 object-cover"
               />
 
-              <h2 className="font-semibold text-gray-800 text-base sm:text-lg">
+              <h2 className="font-semibold text-gray-800 text-lg">
                 {friend.name}
               </h2>
 
-              <span
-                className={`text-xs px-3 py-1 rounded-full mt-2 inline-block ${getStatusStyle(
-                  friend.status
-                )}`}
-              >
+              <span className={`text-xs px-3 py-1 rounded-full mt-2 inline-block ${getStatusStyle(friend.status)}`}>
                 {friend.status}
               </span>
 
@@ -101,126 +90,91 @@ if (!friend) {
                 {friend.tags.map((tag, i) => (
                   <span
                     key={i}
-                    className="text-[10px] bg-green-200 text-gray-700 px-2 py-1 rounded-full"
+                    className="text-xs bg-green-200 text-gray-700 px-2 py-1 rounded-full"
                   >
                     {tag}
                   </span>
                 ))}
               </div>
 
-              <p className="text-xs text-gray-500 mt-4 italic px-2">
+              <p className="text-xs text-gray-500 mt-4 italic">
                 "{friend.bio}"
               </p>
 
               <p className="text-xs text-gray-400 mt-1 break-all">
-                Preferred: {friend.email}
+                {friend.email}
               </p>
             </div>
 
-            {/* ACTION BUTTONS */}
+            {/* BUTTONS */}
             <div className="space-y-3">
-              <button className="w-full flex items-center justify-center gap-3 bg-white border rounded-xl py-3 sm:py-4 text-sm sm:text-base hover:bg-gray-50 transition">
-                <FaBell /> Snooze 2 Weeks
+              <button className="w-full flex items-center justify-center gap-2 bg-white border rounded-xl py-3 text-sm hover:bg-gray-50">
+                <FaBell /> Snooze
               </button>
 
-              <button className="w-full flex items-center justify-center gap-3 bg-white border rounded-xl py-3 sm:py-4 text-sm sm:text-base hover:bg-gray-50 transition">
+              <button className="w-full flex items-center justify-center gap-2 bg-white border rounded-xl py-3 text-sm hover:bg-gray-50">
                 <FaArchive /> Archive
               </button>
 
-              <button className="w-full flex items-center justify-center gap-3 bg-white border rounded-xl py-3 sm:py-4 text-sm sm:text-base text-red-500 hover:bg-red-50 transition">
+              <button className="w-full flex items-center justify-center gap-2 bg-white border rounded-xl py-3 text-sm text-red-500 hover:bg-red-50">
                 <FaTrash /> Delete
               </button>
             </div>
+
           </div>
 
-          {/* RIGHT SIDE */}
+          {/* RIGHT */}
           <div className="md:col-span-2 space-y-6">
 
-            {/* TOP STATS */}
+            {/* STATS */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
 
-              <div className="bg-white p-4 sm:p-5 rounded-xl border text-center shadow-sm">
-                <h2 className="text-xl sm:text-2xl font-bold text-[#1f4d3a]">
+              <div className="bg-white p-4 rounded-xl border text-center">
+                <h2 className="text-2xl font-bold text-[#1f4d3a]">
                   {friend.days_since_contact}
                 </h2>
-                <p className="text-xs text-gray-500 mt-1">
-                  Days Since Contact
-                </p>
+                <p className="text-xs text-gray-500">Days Since</p>
               </div>
 
-              <div className="bg-white p-4 sm:p-5 rounded-xl border text-center shadow-sm">
-                <h2 className="text-xl sm:text-2xl font-bold text-[#1f4d3a]">
+              <div className="bg-white p-4 rounded-xl border text-center">
+                <h2 className="text-2xl font-bold text-[#1f4d3a]">
                   {friend.goal}
                 </h2>
-                <p className="text-xs text-gray-500 mt-1">
-                  Goal (Days)
-                </p>
+                <p className="text-xs text-gray-500">Goal</p>
               </div>
 
-              <div className="bg-white p-4 sm:p-5 rounded-xl border text-center shadow-sm">
-                <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-[#1f4d3a]">
+              <div className="bg-white p-4 rounded-xl border text-center">
+                <h2 className="text-lg font-bold text-[#1f4d3a]">
                   {friend.next_due_date}
                 </h2>
-                <p className="text-xs text-gray-400 mt-1">
-                  Next Due
-                </p>
+                <p className="text-xs text-gray-500">Next Due</p>
               </div>
 
             </div>
 
-            {/* RELATIONSHIP GOAL */}
-            <div className="bg-white rounded-xl border p-5 sm:p-6 shadow-sm">
-              <div className="flex justify-between items-center mb-3">
-                <h3 className="font-semibold text-gray-800 text-sm sm:text-base">
-                  Relationship Goal
-                </h3>
-
-                <button className="text-xs border px-3 py-1 rounded hover:bg-gray-50">
-                  Edit
-                </button>
-              </div>
-
-              <p className="text-sm text-gray-600">
-                Connect every <b>{friend.goal} days</b>
-              </p>
-            </div>
-
-            {/* QUICK CHECK-IN */}
-            <div className="bg-white rounded-xl border p-5 sm:p-6 shadow-sm">
-              <h3 className="mb-4 font-semibold text-gray-800 text-sm sm:text-base">
+            {/* QUICK ACTION */}
+            <div className="bg-white rounded-xl border p-5">
+              <h3 className="mb-4 font-semibold text-gray-800">
                 Quick Check-In
               </h3>
 
-              <div className="grid grid-cols-3 gap-3 sm:gap-4 text-center">
+              <div className="grid grid-cols-3 gap-3">
 
-                <div
-                  onClick={() => addToTimeline("Call")}
-                  className="bg-gray-100 p-4 sm:p-5 rounded-lg hover:bg-gray-200 cursor-pointer transition"
-                >
-                  <FaPhoneAlt className="mx-auto mb-2 text-gray-500 text-lg sm:text-xl" />
-                  <p className="text-xs sm:text-sm text-gray-700">Call</p>
-                </div>
-
-                <div
-                  onClick={() => addToTimeline("Text")}
-                  className="bg-gray-100 p-4 sm:p-5 rounded-lg hover:bg-gray-200 cursor-pointer transition"
-                >
-                  <FaCommentDots className="mx-auto mb-2 text-gray-500 text-lg sm:text-xl" />
-                  <p className="text-xs sm:text-sm text-gray-700">Text</p>
-                </div>
-
-                <div
-                  onClick={() => addToTimeline("Video")}
-                  className="bg-gray-100 p-4 sm:p-5 rounded-lg hover:bg-gray-200 cursor-pointer transition"
-                >
-                  <FaVideo className="mx-auto mb-2 text-gray-500 text-lg sm:text-xl" />
-                  <p className="text-xs sm:text-sm text-gray-700">Video</p>
-                </div>
+                {["Call", "Text", "Video"].map((type) => (
+                  <div
+                    key={type}
+                    onClick={() => addToTimeline(type)}
+                    className="bg-gray-100 p-4 rounded-lg text-center hover:bg-gray-200 cursor-pointer transition"
+                  >
+                    <p className="text-sm text-gray-700">{type}</p>
+                  </div>
+                ))}
 
               </div>
             </div>
 
           </div>
+
         </div>
       </div>
     </div>

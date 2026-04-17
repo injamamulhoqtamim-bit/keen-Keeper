@@ -11,16 +11,18 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement: <NotFound />,
     children: [
-      { index: true, element: <Home /> },
-      { path: "timeline", element: <Timeline /> },
-      { path: "stats", element: <Stats /> },
-      { path: "friend/:id", element: <FriendDetails /> },
+      { path: "/", element: <Home /> },
+      { path: "/timeline", element: <Timeline /> },
+      { path: "/stats", element: <Stats /> },
+      { path: "/friend/:id", element: <FriendDetails /> },
+
+      // ✅ 404 route (main one)
+      { path: "*", element: <NotFound /> },
     ],
   },
 ]);
 
-export default function Router() {
+export default function Routes() {
   return <RouterProvider router={router} />;
 }
